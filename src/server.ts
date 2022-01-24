@@ -11,6 +11,7 @@ import { setBonusEveryMonth } from "@utils/calculate";
 import { Jobs } from "@lib/jobs";
 import morgan from "morgan";
 import { loggerGetId, logger, loggerGetRole } from "@middlewares/logger";
+import { rawBody } from "@middlewares/raw";
 
 const job = new Jobs();
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(helmet());
 app.use(limiter);
+app.use(rawBody)
 
 
 app.use(sentery.requestHandler);

@@ -16,6 +16,7 @@ const calculate_1 = require("./utils/calculate");
 const jobs_1 = require("./lib/jobs");
 const morgan_1 = __importDefault(require("morgan"));
 const logger_1 = require("./middlewares/logger");
+const raw_1 = require("./middlewares/raw");
 const job = new jobs_1.Jobs();
 const app = (0, express_1.default)();
 sentry_server_config_1.sentery.init(app);
@@ -24,6 +25,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, compression_1.default)());
 app.use((0, helmet_1.default)());
 app.use(limiter_1.limiter);
+app.use(raw_1.rawBody);
 app.use(sentry_server_config_1.sentery.requestHandler);
 app.use(sentry_server_config_1.sentery.tracingHandler);
 // init logger
